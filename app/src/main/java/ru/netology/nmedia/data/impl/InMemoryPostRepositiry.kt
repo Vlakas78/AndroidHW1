@@ -7,34 +7,41 @@ import ru.netology.nmedia.dto.Post
 
 class InMemoryPostRepositiry : PostRepository {
 
+    private val posts
+        get() = checkNotNull(data.value) {
+            "Data value should not be null"
+        }
+
     override val data = MutableLiveData(
-    Post(
-    id = 1,
-    author = "Нетология. Университет интернет-профессий будущего",
-    content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-    published = "04 мая в 19:27",
-    likedByMe = false
-    )
-    )
-    override fun like() {
-        val currentPost = checkNotNull(data.value) {
-            "Data value should not be null"
+        List(10) { index ->
+            Post(
+                id = index + 1L,
+                author = "Нетология",
+                content = "Контент $index",
+                published = "04 мая в 19:27",
+                likedByMe = false
+            )
         }
-        if (currentPost.likedByMe) currentPost.likes-- else currentPost.likes++
-        val likedPost = currentPost.copy(
-        likedByMe = !currentPost.likedByMe)
+    )
 
+    override fun like(postId: Long) {
+        data.value = posts.map { post ->
+            if (post.id != postId) post
+            else {
+                if (post.likedByMe) post.likes-- else post.likes++
+                post.copy(likedByMe = !post.likedByMe, likes = post.likes)
+            }
 
-        data.value = likedPost
+        }
     }
-    override fun share() {
-        val currentPost = checkNotNull(data.value) {
-            "Data value should not be null"
+
+    override fun share(postId: Long) {
+        data.value = posts.map { post ->
+            if (post.id != postId) post
+            else {
+                post.copy(counterShare = post.counterShare + 1)
+            }
         }
-        currentPost.counterShare++
-        val sharePost = currentPost.copy(
-            counterShare = currentPost.counterShare
-        )
-        data.value = sharePost
+
     }
 }
