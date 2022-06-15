@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="@dimen/common_spacing">
 
 
@@ -29,7 +29,8 @@
         app:layout_constraintBottom_toTopOf="@id/date"
         app:layout_constraintEnd_toStartOf="@id/options"
         app:layout_constraintStart_toEndOf="@+id/avatar"
-        app:layout_constraintTop_toTopOf="@+id/avatar" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/date"
@@ -63,7 +64,7 @@
         android:id="@+id/textPost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/textPost"
+        android:text="@string/content"
         app:layout_constraintTop_toBottomOf="@id/headerBarrier" />
 
     <androidx.constraintlayout.widget.Barrier
@@ -149,6 +150,8 @@
         app:layout_constraintStart_toEndOf="@+id/buttonVisibility"
         app:layout_constraintTop_toBottomOf="@id/postBarrier"
         tools:ignore="HardcodedText" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
