@@ -12,4 +12,6 @@
     <string name="description_post_like">Like</string>
     <string name="post_text">Post Text</string>
     <string name="menu_edit">Edit</string>
+    <string name="edit_message">Edit</string>
+
 </resources>

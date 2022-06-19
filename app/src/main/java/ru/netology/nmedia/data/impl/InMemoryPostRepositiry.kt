@@ -53,6 +53,7 @@ class InMemoryPostRepositiry : PostRepository {
 
     override fun save(post: Post) {
         if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
+
     }
 
     private fun update(post: Post) {
