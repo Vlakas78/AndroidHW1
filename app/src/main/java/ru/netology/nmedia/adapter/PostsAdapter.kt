@@ -75,8 +75,6 @@ internal class PostsAdapter(
          }
      }
 
-//            buttonLike.setOnClickListener { onLikeClicked(post) }
-//            binding.buttonShare.setOnClickListener { onShareClicked(post) }
         }
     fun countView(number: Int): String {
         return when {
