@@ -8,10 +8,10 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/avatar"
-        app:layout_constraintBottom_toBottomOf="@id/headerBarrier"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/avatar_description"
+        app:layout_constraintBottom_toBottomOf="@id/headerBarrier"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/img" />
@@ -42,14 +42,15 @@
         app:layout_constraintStart_toStartOf="@id/authorName"
         app:layout_constraintTop_toBottomOf="@id/authorName" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/options"
+        style="@style/Widget.App.Button.OptionsCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:src="@drawable/ic_baseline_more_vert_24"
+        app:icon="@drawable/ic_baseline_more_vert_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/headerBarrier"
@@ -73,82 +74,56 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="textPost" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLike"
+        style="@style/Widget.AppTheme.LikeCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:src="@drawable/ic_baseline_favorite_like_24"
-        app:layout_constraintEnd_toStartOf="@+id/amountLike"
+        android:checkable="true"
+        app:icon="@drawable/ic_like_24dp"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/postBarrier"
+        tools:text="100" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonShare"
+        style="@style/Widget.AppTheme.ShareCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkable="true"
+        app:icon="@drawable/ic_baseline_share_24"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonLike"
+        app:layout_constraintTop_toBottomOf="@id/postBarrier"
+        tools:text="100" />
+
+      <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/buttonVisibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:background="@color/white"
+        android:src="@drawable/ic_baseline_visibility_24"
+        app:layout_constraintEnd_toStartOf="@+id/amountVisibility"
+        app:layout_constraintStart_toEndOf="@+id/buttonShare"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/postBarrier" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/amountLike"
-        android:layout_width="26dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:text="10"
-        app:layout_constraintEnd_toStartOf="@+id/buttonShare"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonLike"
-        app:layout_constraintTop_toBottomOf="@id/postBarrier"
-        tools:ignore="HardcodedText" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/buttonShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:background="@color/white"
-        android:src="@drawable/ic_baseline_share_24"
-        app:layout_constraintEnd_toStartOf="@+id/amountShare"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/amountLike"
-        app:layout_constraintTop_toBottomOf="@id/postBarrier" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/amountShare"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:text="5"
-        app:layout_constraintEnd_toStartOf="@+id/buttonVisibility"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonShare"
-        app:layout_constraintTop_toBottomOf="@id/postBarrier"
-        tools:ignore="HardcodedText" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/buttonVisibility"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:background="@color/white"
-        android:src="@drawable/ic_baseline_visibility_24"
-        app:layout_constraintEnd_toStartOf="@+id/amountVisibility"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/amountShare"
-        app:layout_constraintTop_toBottomOf="@id/postBarrier" />
-
-    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/amountVisibility"
-        android:layout_width="28dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:singleLine="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="@dimen/common_spacing"
         android:text="5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonVisibility"
         app:layout_constraintTop_toBottomOf="@id/postBarrier"
         tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 

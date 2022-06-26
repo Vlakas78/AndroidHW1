@@ -59,8 +59,8 @@ internal class PostsAdapter(
         init {
             binding.buttonLike.setOnClickListener { listener.onLikeClicked(post) }
             binding.buttonShare.setOnClickListener { listener.onShareClicked(post) }
-
         }
+
 
         fun bind(post: Post) {
             this.post = post
@@ -68,9 +68,9 @@ internal class PostsAdapter(
                 authorName.text = post.author
                 textPost.text = post.content
                 date.text = post.published
-                amountLike.text = countView(post.likes)
-                buttonLike.setImageResource(if (post.likedByMe) R.drawable.ic_baseline_favorite_like_24 else R.drawable.ic_baseline_favorite_24)
-                amountShare.text = countView(post.counterShare)
+                buttonLike.text = countView(post.likes)
+                buttonLike.isChecked = post.likedByMe
+                buttonShare.text = countView(post.counterShare)
                 options.setOnClickListener { popupMenu.show() }
             }
         }
