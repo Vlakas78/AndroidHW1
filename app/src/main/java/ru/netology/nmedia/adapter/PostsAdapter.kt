@@ -28,12 +28,12 @@ internal class PostsAdapter(
     }
 
 
-     class ViewHolder(
+    class ViewHolder(
         private val binding: PostBinding,
         listener: PostInteractionListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        private lateinit var post : Post
+        private lateinit var post: Post
 
         private val popupMenu by lazy {
             PopupMenu(itemView.context, binding.options).apply {
@@ -56,37 +56,36 @@ internal class PostsAdapter(
         }
 
 
-         init {
-             binding.buttonLike.setOnClickListener { listener.onLikeClicked(post)}
-             binding.buttonShare.setOnClickListener { listener.onShareClicked(post)}
-
-         }
-
-         fun bind(post: Post)  {
-             this.post = post
-             with(binding) {
-             authorName.text = post.author
-             textPost.text = post.content
-             date.text = post.published
-             amountLike.text = countView(post.likes)
-             buttonLike.setImageResource(if (post.likedByMe) R.drawable.ic_baseline_favorite_like_24 else R.drawable.ic_baseline_favorite_24)
-             amountShare.text = countView(post.counterShare)
-             options.setOnClickListener { popupMenu.show() }
-         }
-     }
+        init {
+            binding.buttonLike.setOnClickListener { listener.onLikeClicked(post) }
+            binding.buttonShare.setOnClickListener { listener.onShareClicked(post) }
 
         }
-    fun countView(number: Int): String {
-        return when {
-            number in 0..999 -> number.toString()
-            number < 10000 && number % 1000 < 100 -> "${(number / 1000)}K"
-            number in 1100..9999 -> "${floor((number.toDouble() / 1000) * 10) / 10}K"
-            number in 10000..999999 -> "${(number / 1000)}K"
-            number % 1000000 < 100000 -> "${(number / 1000000)}M"
-            number in 1000000..999999999 -> "${floor((number.toDouble() / 1000000) * 10) / 10}M"
-            else -> "0"
+
+        fun bind(post: Post) {
+            this.post = post
+            with(binding) {
+                authorName.text = post.author
+                textPost.text = post.content
+                date.text = post.published
+                amountLike.text = countView(post.likes)
+                buttonLike.setImageResource(if (post.likedByMe) R.drawable.ic_baseline_favorite_like_24 else R.drawable.ic_baseline_favorite_24)
+                amountShare.text = countView(post.counterShare)
+                options.setOnClickListener { popupMenu.show() }
+            }
         }
     }
+        fun countView(number: Int): String {
+            return when {
+                number in 0..999 -> number.toString()
+                number < 10000 && number % 1000 < 100 -> "${(number / 1000)}K"
+                number in 1100..9999 -> "${floor((number.toDouble() / 1000) * 10) / 10}K"
+                number in 10000..999999 -> "${(number / 1000)}K"
+                number % 1000000 < 100000 -> "${(number / 1000000)}M"
+                number in 1000000..999999999 -> "${floor((number.toDouble() / 1000000) * 10) / 10}M"
+                else -> "0"
+            }
+        }
 
         private object DiffCallBack : DiffUtil.ItemCallback<Post>() {
             override fun areItemsTheSame(oldItem: Post, newItem: Post) =
@@ -96,6 +95,7 @@ internal class PostsAdapter(
                 oldItem == newItem
         }
     }
+
 
 
 

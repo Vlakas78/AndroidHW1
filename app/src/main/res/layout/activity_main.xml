@@ -25,7 +25,7 @@
         app:barrierDirection="top"
         app:constraint_referenced_ids="contentEditText,saveButton" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <EditText
         android:id="@+id/contentEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
