@@ -14,5 +14,8 @@
     <string name="description_post_like">Нравится</string>
     <string name="menu_edit">Изменить</string>
     <string name="edit_message">Редакдирование сообщения</string>
+    <string name="chooser_share_post">Поделиться</string>
+    <string name="description_post_save">Сохранить</string>
+    <string name="add_post">Добавить пост</string>
 
 </resources>

@@ -9,7 +9,8 @@ data class Post(
     val published: String,
     var likes: Int = 999,
     var counterShare:Int = 5,
-    var likedByMe: Boolean = false
+    var likedByMe: Boolean = false,
+    val video: String? = null
 )
 
 fun countView(number: Int): String {

@@ -1,5 +1,6 @@
 package ru.netology.nmedia
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,7 +10,9 @@ import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.util.hideKeyboard
 import ru.netology.nmedia.viewMoel.PostViewModel
 import android.widget.Toast
+import ru.netology.nmedia.activity.PostContentActivity
 import ru.netology.nmedia.util.focusAndShowKeyboard
+import android.net.Uri
 
 
 class MainActivity : AppCompatActivity(R.layout.post) {
@@ -29,51 +32,44 @@ class MainActivity : AppCompatActivity(R.layout.post) {
             adapter.submitList(posts)
         }
 
-        binding.saveButton.setOnClickListener {
-            with(binding.contentEditText) {
-                if (text.isNullOrBlank()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Text can't be empty",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
-                val content = text.toString()
-                viewModel.onSaveButtonClicked(content)
-                clearFocus()
-                hideKeyboard()
-
-            }
-        }
-        binding.closeEditButton.setOnClickListener {
-            with(binding.contentEditText) {
-                viewModel.onCloseEditClicked()
-                clearFocus()
-                hideKeyboard()
-            }
-            binding.groupForEdit.visibility = View.GONE
+        binding.fab.setOnClickListener {
+            viewModel.onAddClicked()
         }
 
-        viewModel.currentPost.observe(this) { currentPost ->
-            with(binding.contentEditText) {
-                val content = currentPost?.content
-                setText(content)
-                if (content != null) {
-                    binding.editMessageTextContent.text = content
-                    binding.groupForEdit.visibility = View.VISIBLE
-                    focusAndShowKeyboard()
-                } else {
-                    binding.groupForEdit.visibility = View.GONE
-                    clearFocus()
-                    hideKeyboard()
-                }
-
-                }
+        viewModel.sharePostContent.observe(this) { postContent ->
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, postContent)
+                type = "text/plain"
             }
 
+            val shareIntent = Intent.createChooser(
+                intent, getString(R.string.chooser_share_post)
+            )
+            startActivity(shareIntent)
         }
+
+        viewModel.playVideo.observe(this) { videoUrl ->
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            }
+        }
+
+        val postContentActivityLauncher = registerForActivityResult(
+            PostContentActivity.ResultContract
+        ) { postContent ->
+            postContent ?: return@registerForActivityResult
+            viewModel.onSaveButtonClicked(postContent)
+        }
+
+    viewModel.navigateToPostContentScreenEvent.observe(this) {
+        val contentForEdit = viewModel.currentPost.value?.content
+        postContentActivityLauncher.launch(contentForEdit)
     }
+
+    }
+}
 
 
 

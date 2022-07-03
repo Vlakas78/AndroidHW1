@@ -11,12 +11,14 @@ import ru.netology.nmedia.databinding.PostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.dto.countView
 import kotlin.math.floor
+import androidx.core.view.isVisible
 
 
 internal class PostsAdapter(
 
     private val interactionListener: PostInteractionListener
-) : ListAdapter<Post, PostsAdapter.ViewHolder> (DiffCallBack) {
+) : ListAdapter<Post, PostsAdapter.ViewHolder>(DiffCallBack) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostBinding.inflate(inflater, parent, false)
@@ -59,22 +61,29 @@ internal class PostsAdapter(
         init {
             binding.buttonLike.setOnClickListener { listener.onLikeClicked(post) }
             binding.buttonShare.setOnClickListener { listener.onShareClicked(post) }
-        }
+            binding.videoBanner.setOnClickListener {
+                listener.onPlayVideoClicked(post)
+            }
+            binding.playVideo.setOnClickListener {
+                listener.onPlayVideoClicked(post)
+            }
 
 
-        fun bind(post: Post) {
-            this.post = post
-            with(binding) {
-                authorName.text = post.author
-                textPost.text = post.content
-                date.text = post.published
-                buttonLike.text = countView(post.likes)
-                buttonLike.isChecked = post.likedByMe
-                buttonShare.text = countView(post.counterShare)
-                options.setOnClickListener { popupMenu.show() }
+            fun bind(post: Post) {
+                this.post = post
+                with(binding) {
+                    authorName.text = post.author
+                    textPost.text = post.content
+                    date.text = post.published
+                    buttonLike.text = countView(post.likes)
+                    buttonLike.isChecked = post.likedByMe
+                    buttonShare.text = countView(post.counterShare)
+                    videoGroup.isVisible = post.video != null
+                    options.setOnClickListener { popupMenu.show() }
+                }
             }
         }
-    }
+
         fun countView(number: Int): String {
             return when {
                 number in 0..999 -> number.toString()
@@ -87,7 +96,7 @@ internal class PostsAdapter(
             }
         }
 
-        private object DiffCallBack : DiffUtil.ItemCallback<Post>() {
+        object DiffCallBack : DiffUtil.ItemCallback<Post>() {
             override fun areItemsTheSame(oldItem: Post, newItem: Post) =
                 oldItem.id == newItem.id
 
@@ -95,6 +104,8 @@ internal class PostsAdapter(
                 oldItem == newItem
         }
     }
+}
+
 
 
 

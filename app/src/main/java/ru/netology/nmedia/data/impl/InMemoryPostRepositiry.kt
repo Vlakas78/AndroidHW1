@@ -21,7 +21,8 @@ class InMemoryPostRepositiry : PostRepository {
                 author = "Нетология",
                 content = "Контент $index",
                 published = "04 мая в 19:27",
-                likedByMe = false
+                likedByMe = false,
+                video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
             )
         }
     )

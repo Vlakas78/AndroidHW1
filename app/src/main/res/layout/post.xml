@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="@id/headerBarrier"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img" />
+        app:srcCompat="@drawable/image_video" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/authorName"
@@ -67,6 +67,31 @@
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
         tools:layout_editor_absoluteX="16dp" />
 
+
+    <View
+        android:id="@+id/video_banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/image_video"
+        app:layout_constraintTop_toBottomOf="@id/textPost"/>
+
+    <View
+        android:id="@+id/play_video"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:drawable/ic_media_play"
+        app:layout_constraintTop_toTopOf="@id/video_banner"
+        app:layout_constraintBottom_toBottomOf="@id/video_banner"
+        app:layout_constraintStart_toStartOf="@id/video_banner"
+        app:layout_constraintEnd_toEndOf="@id/video_banner"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/video_group"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:constraint_referenced_ids="video_banner, play_video"/>
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/postBarrier"
         android:layout_width="0dp"
