@@ -14,6 +14,7 @@ import kotlin.math.floor
 import androidx.core.view.isVisible
 
 
+
 internal class PostsAdapter(
 
     private val interactionListener: PostInteractionListener
@@ -68,7 +69,7 @@ internal class PostsAdapter(
                 listener.onPlayVideoClicked(post)
             }
 
-
+        }
             fun bind(post: Post) {
                 this.post = post
                 with(binding) {
@@ -82,7 +83,7 @@ internal class PostsAdapter(
                     options.setOnClickListener { popupMenu.show() }
                 }
             }
-        }
+
 
         fun countView(number: Int): String {
             return when {
@@ -95,7 +96,7 @@ internal class PostsAdapter(
                 else -> "0"
             }
         }
-
+    }
         object DiffCallBack : DiffUtil.ItemCallback<Post>() {
             override fun areItemsTheSame(oldItem: Post, newItem: Post) =
                 oldItem.id == newItem.id
@@ -104,7 +105,7 @@ internal class PostsAdapter(
                 oldItem == newItem
         }
     }
-}
+
 
 
 
