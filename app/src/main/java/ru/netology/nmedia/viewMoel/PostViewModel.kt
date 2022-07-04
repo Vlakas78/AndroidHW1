@@ -1,21 +1,15 @@
 package ru.netology.nmedia.viewMoel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.InMemoryPostRepositiry
-import ru.netology.nmedia.data.impl.SharedPrefsPostRepository
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.util.SingleLiveEvent
+class PostViewModel : ViewModel(), PostInteractionListener {
 
-class PostViewModel(
-    application: Application
-) : AndroidViewModel(application), PostInteractionListener {
-
-    private val repository: PostRepository = SharedPrefsPostRepository(application)
+    private val repository: PostRepository = InMemoryPostRepositiry()
 
     val data by repository :: data
 
@@ -28,7 +22,7 @@ class PostViewModel(
     fun onSaveButtonClicked(content : String) {
         if(content.isBlank()) return
 
-        val post = currentPost.value?.copy(
+        val newPost = currentPost.value?.copy(
             content = content
         ) ?: Post(
             id = PostRepository.NEW_POST_ID,
@@ -36,7 +30,7 @@ class PostViewModel(
             content = content,
             published = "Today"
         )
-        repository.save(post)
+        repository.save(newPost)
         currentPost.value = null
     }
 
@@ -57,8 +51,13 @@ class PostViewModel(
 
     override fun onRemovedClicked(post: Post)  = repository.delete(post.id)
 
-    override fun onEditClicked(post: Post) {currentPost.value = post
+
+    override fun onEditClicked(post: Post) {
+        currentPost.value = post
+        navigateToPostContentScreenEvent.value = post.content
+
     }
+
 
     override fun onPlayVideoClicked(post: Post) {
         val url: String = requireNotNull(post.video) {
@@ -69,3 +68,4 @@ class PostViewModel(
 
     // endregion PostInteractionListener
 }
+

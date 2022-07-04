@@ -63,10 +63,10 @@ class MainActivity : AppCompatActivity(R.layout.post) {
             viewModel.onSaveButtonClicked(postContent)
         }
 
-    viewModel.navigateToPostContentScreenEvent.observe(this) {
-        val contentForEdit = viewModel.currentPost.value?.content
-        postContentActivityLauncher.launch(contentForEdit)
-    }
+        viewModel.navigateToPostContentScreenEvent.observe(this) {
+            val contentForEdit = viewModel.currentPost.value?.content
+            postContentActivityLauncher.launch(contentForEdit)
+        }
 
     }
 }

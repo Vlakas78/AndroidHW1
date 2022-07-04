@@ -11,16 +11,20 @@ import ru.netology.nmedia.util.focusAndShowKeyboard
 
 class PostContentActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding = PostContentActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val extras = intent.extras
         if (extras != null) {
             binding.edit.setText(extras.getString(RESULT_KEY_EDIT))
         }
+
+
 
         binding.edit.focusAndShowKeyboard()
 
@@ -31,12 +35,14 @@ class PostContentActivity : AppCompatActivity() {
                 setResult(Activity.RESULT_CANCELED, intent)
             } else {
                 val content = text.toString()
-                intent.putExtra(Intent.EXTRA_TEXT, content)
+                intent.putExtra(RESULT_KEY, content)
                 setResult(Activity.RESULT_OK, intent)
             }
             finish()
         }
+
     }
+
     object ResultContract : ActivityResultContract<String?, String?>() {
 
         override fun createIntent(context: Context, input: String?): Intent {
@@ -50,12 +56,10 @@ class PostContentActivity : AppCompatActivity() {
 
     }
 
+
     private companion object {
         private const val RESULT_KEY = "postNewContent"
         private const val RESULT_KEY_EDIT = "postEditContent"
     }
 }
-
-
-
 

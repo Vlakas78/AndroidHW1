@@ -70,19 +70,19 @@ internal class PostsAdapter(
             }
 
         }
-            fun bind(post: Post) {
-                this.post = post
-                with(binding) {
-                    authorName.text = post.author
-                    textPost.text = post.content
-                    date.text = post.published
-                    buttonLike.text = countView(post.likes)
-                    buttonLike.isChecked = post.likedByMe
-                    buttonShare.text = countView(post.counterShare)
-                    videoGroup.isVisible = post.video != null
-                    options.setOnClickListener { popupMenu.show() }
-                }
+        fun bind(post: Post) {
+            this.post = post
+            with(binding) {
+                authorName.text = post.author
+                textPost.text = post.content
+                date.text = post.published
+                buttonLike.text = countView(post.likes)
+                buttonLike.isChecked = post.likedByMe
+                buttonShare.text = countView(post.counterShare)
+                videoGroup.isVisible = post.video != null
+                options.setOnClickListener { popupMenu.show() }
             }
+        }
 
 
         fun countView(number: Int): String {
@@ -97,14 +97,14 @@ internal class PostsAdapter(
             }
         }
     }
-        object DiffCallBack : DiffUtil.ItemCallback<Post>() {
-            override fun areItemsTheSame(oldItem: Post, newItem: Post) =
-                oldItem.id == newItem.id
+    object DiffCallBack : DiffUtil.ItemCallback<Post>() {
+        override fun areItemsTheSame(oldItem: Post, newItem: Post) =
+            oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Post, newItem: Post) =
-                oldItem == newItem
-        }
+        override fun areContentsTheSame(oldItem: Post, newItem: Post) =
+            oldItem == newItem
     }
+}
 
 
 
