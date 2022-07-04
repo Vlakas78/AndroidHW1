@@ -1,16 +1,21 @@
 package ru.netology.nmedia.viewMoel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.InMemoryPostRepositiry
+import ru.netology.nmedia.data.impl.SharedPrefsPostRepository
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.util.SingleLiveEvent
 
-class PostViewModel : ViewModel(), PostInteractionListener {
+class PostViewModel(
+    application: Application
+) : AndroidViewModel(application), PostInteractionListener {
 
-    private val repository: PostRepository = InMemoryPostRepositiry()
+    private val repository: PostRepository = SharedPrefsPostRepository(application)
 
     val data by repository :: data
 
@@ -23,7 +28,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     fun onSaveButtonClicked(content : String) {
         if(content.isBlank()) return
 
-        val newPost = currentPost.value?.copy(
+        val post = currentPost.value?.copy(
             content = content
         ) ?: Post(
             id = PostRepository.NEW_POST_ID,
@@ -31,7 +36,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
             content = content,
             published = "Today"
         )
-        repository.save(newPost)
+        repository.save(post)
         currentPost.value = null
     }
 

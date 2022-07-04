@@ -16,16 +16,42 @@ class InMemoryPostRepositiry : PostRepository {
 
     override val data = MutableLiveData(
         List(GENERATED_POSTS_AMOUNT) { index ->
-            Post(
-                id = index + 1L,
-                author = "Нетология",
-                content = "Контент $index",
-                published = "04 мая в 19:27",
-                likedByMe = false,
-                video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
-            )
+            if (index == 1) {
+                Post(
+                    id = index + 1L,
+                    author = "Netology",
+                    content = "Content $index",
+                    published = "21.05.2022",
+                    likes = 999,
+                    video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
+                )
+            } else {
+                Post(
+                    id = index + 1L,
+                    author = "Netology",
+                    content = "Content $index",
+                    published = "21.05.2022",
+                    likes = 999,
+
+                )
+            }
         }
+
     )
+
+
+//    override val data = MutableLiveData(
+//        List(GENERATED_POSTS_AMOUNT) { index ->
+//            Post(
+//                id = index + 1L,
+//                author = "Нетология",
+//                content = "Контент $index",
+//                published = "04 мая в 19:27",
+//                likedByMe = false,
+//                video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
+//            )
+//        }
+//    )
 
     override fun like(postId: Long) {
         data.value = posts.map { post ->
