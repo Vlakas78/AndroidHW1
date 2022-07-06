@@ -3,18 +3,16 @@ package ru.netology.nmedia
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.util.hideKeyboard
 import ru.netology.nmedia.viewMoel.PostViewModel
-import android.widget.Toast
-import ru.netology.nmedia.activity.PostContentActivity
-import ru.netology.nmedia.util.focusAndShowKeyboard
+import ru.netology.nmedia.UI.PostContentActivity
 import android.net.Uri
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 
-class MainActivity : AppCompatActivity(R.layout.post) {
+class FeedFragment : Fragment() {
 
     private val viewModel by viewModels<PostViewModel>()
 
@@ -22,7 +20,7 @@ class MainActivity : AppCompatActivity(R.layout.post) {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
 
         val viewModel by viewModels<PostViewModel>()
         val adapter = PostsAdapter(viewModel)

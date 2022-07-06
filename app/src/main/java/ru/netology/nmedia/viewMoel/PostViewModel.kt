@@ -46,9 +46,9 @@ class PostViewModel(
         navigateToPostContentScreenEvent.call()
     }
 
-    fun onCloseEditClicked() {
-        currentPost.value = null
-    }
+//    fun onCloseEditClicked() {
+//        currentPost.value = null
+//    }
 
     // region PostInteractionListener
 
@@ -56,6 +56,7 @@ class PostViewModel(
 
     override fun onShareClicked(post: Post) {
         sharePostContent.value = post.content
+        repository.share(post.id)
     }
 
     override fun onRemovedClicked(post: Post) = repository.delete(post.id)
