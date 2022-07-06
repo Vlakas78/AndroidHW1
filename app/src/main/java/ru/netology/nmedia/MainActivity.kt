@@ -14,7 +14,6 @@ import ru.netology.nmedia.activity.PostContentActivity
 import ru.netology.nmedia.util.focusAndShowKeyboard
 import android.net.Uri
 
-
 class MainActivity : AppCompatActivity(R.layout.post) {
 
     private val viewModel by viewModels<PostViewModel>()
@@ -70,7 +69,6 @@ class MainActivity : AppCompatActivity(R.layout.post) {
 
     }
 }
-
 
 
 

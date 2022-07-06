@@ -14,7 +14,6 @@ import kotlin.math.floor
 import androidx.core.view.isVisible
 
 
-
 internal class PostsAdapter(
 
     private val interactionListener: PostInteractionListener
