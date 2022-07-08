@@ -27,6 +27,7 @@ class PostViewModel(
     val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
     val playVideo = SingleLiveEvent<String>()
 
+
     fun onSaveButtonClicked(content: String) {
         if (content.isBlank()) return
 

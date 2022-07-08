@@ -14,7 +14,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 
-class FeedFragment : Fragment() {
+
+class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<PostViewModel>()
 
@@ -22,7 +23,7 @@ class FeedFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
-
+        setContentView(binding.root)
 
         val viewModel by viewModels<PostViewModel>()
         val adapter = PostsAdapter(viewModel)
@@ -34,35 +35,6 @@ class FeedFragment : Fragment() {
         binding.fab.setOnClickListener {
             viewModel.onAddClicked()
         }
-
-//        private val viewModel: PostViewModel by activityViewModels()
-//
-//        private val Fragment.packageManager
-//        get() = activity?.packageManager
-//
-//        override fun onCreate(savedInstanceState: Bundle?) {
-//            super.onCreate(savedInstanceState)
-//
-//            viewModel.sharePostContent.observe(this) { postContent ->
-//                val intent = Intent().apply {
-//                    action = Intent.ACTION_SEND
-//                    putExtra(Intent.EXTRA_TEXT, postContent)
-//                    type = "text/plain"
-//                }
-//
-//                val shareIntent = Intent.createChooser(
-//                    intent, getString(R.string.chooser_share_post)
-//                )
-//                startActivity(shareIntent)
-//            }
-//
-
-
-
-
-
-
-
 
         viewModel.sharePostContent.observe(this) { postContent ->
             val intent = Intent().apply {
@@ -97,26 +69,8 @@ class FeedFragment : Fragment() {
         }
 
     }
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = ActivityMainBinding.inflate(layoutInflater, container, false).also { binding ->
-
-        val adapter = PostsAdapter(viewModel)
-        binding.postsRecyclerView.adapter = adapter
-
-        viewModel.data.observe(viewLifecycleOwner) { posts ->
-            adapter.submitList(posts)
-        }
-
-        binding.fab.setOnClickListener {
-            viewModel.onAddClicked()
-        }
-    }.root
 }
+
 
 
 

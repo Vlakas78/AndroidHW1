@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Runetologynmedia">
         <activity
-            android:name=".UI.AppActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,10 +28,15 @@
         </intent-filter>
     </activity>
 
-
-
+        <activity android:name=".UI.PostContentActivity"
+            android:exported="false"/>
 
     </application>
+
+
+
+
+
 
     <queries>
         <intent>
