@@ -1,12 +1,9 @@
 package ru.netology.nmedia.UI
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
@@ -14,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.netology.nmedia.databinding.PostContentFragmentBinding
 import ru.netology.nmedia.util.focusAndShowKeyboard
-import androidx.lifecycle.ViewModel
+
 
 class PostContentFragment : Fragment() {
 
@@ -40,30 +37,20 @@ class PostContentFragment : Fragment() {
             val resultBundle = Bundle(1)
             resultBundle.putString(RESULT_KEY, text.toString())
 
-            setFragmentResultListener(
-                requestKey = PostContentFragment.REQUEST_KEY
-            ) { requestKey, bundle ->
-                if (requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
-                val newPostContent = bundle.getString(
-                    PostContentFragment.REQUEST_KEY
+            if (args.fromFragment == REQUEST_KEY) {
+                setFragmentResult(
+                    REQUEST_KEY,
+                    resultBundle
                 )
-                    ?: return@setFragmentResultListener
-                viewModel.onSaveButtonClicked(newPostContent)
+            } else if (args.fromFragment == REQUEST_CURRENT_POST_KEY) {
+                setFragmentResult(
+                    REQUEST_CURRENT_POST_KEY,
+                    resultBundle)
             }
         }
-//            if (args.fromFragment == REQUEST_KEY) {
-//                setFragmentResult(
-//                    REQUEST_KEY,
-//                    resultBundle
-//                )
-//            } else if (args.fromFragment == REQUEST_CURRENT_POST_KEY) {
-//                setFragmentResult(
-//                    REQUEST_CURRENT_POST_KEY,
-//                    resultBundle
-//                )
-//            }
-        }
-//        findNavController().popBackStack()
+        findNavController().popBackStack()
+    }
+
 
 
 

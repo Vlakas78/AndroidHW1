@@ -1,22 +1,18 @@
 package ru.netology.nmedia
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import androidx.activity.viewModels
-import ru.netology.nmedia.adapter.PostsAdapter
-
-import ru.netology.nmedia.viewMoel.PostViewModel
-
 import android.net.Uri
+import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.UI.PostContentFragment
+import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.FeedFragmentBinding
-import ru.netology.nmedia.databinding.PostContentFragmentBinding
+import ru.netology.nmedia.viewMoel.PostViewModel
 
 
 class FeedFragment : Fragment() {
