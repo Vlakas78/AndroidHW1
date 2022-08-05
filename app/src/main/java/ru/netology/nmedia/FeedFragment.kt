@@ -53,10 +53,10 @@ class FeedFragment : Fragment() {
         ) { requestKey, bundle ->
             if (requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
             val newPostContent = bundle.getString(
-                PostContentFragment.REQUEST_KEY)
+                PostContentFragment.RESULT_KEY)
                 ?: return@setFragmentResultListener
             viewModel.onSaveButtonClicked(newPostContent)
-            }
+        }
 
 
         viewModel.navigateToPostContentScreenEvent.observe(this) { initialContent ->

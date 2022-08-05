@@ -23,6 +23,7 @@ class PostViewModel(
 
     val sharePostContent = SingleLiveEvent<String>()
 
+
     val currentPost = MutableLiveData<Post?>(null)
     val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
     val navigateToCurrentPostScreenEvent = SingleLiveEvent<Post>()

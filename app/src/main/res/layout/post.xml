@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="@id/headerBarrier"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image_video" />
+        app:srcCompat="@drawable/ic_netology_avatar_24dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/authorName"
