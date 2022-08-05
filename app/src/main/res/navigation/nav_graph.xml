@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/feedFragment">
 
@@ -11,6 +12,9 @@
         <action
             android:id="@+id/to_postContentFragment"
             app:destination="@id/postContentFragment" />
+        <action
+            android:id="@+id/toCurrentPostFragment"
+            app:destination="@id/currentPostFragment" />
     </fragment>
     <fragment
         android:id="@+id/postContentFragment"
@@ -23,6 +27,21 @@
         <argument
             android:name="fromFragment"
             app:argType="string" />
-</fragment>
+        <action
+            android:id="@+id/action_postContentFragment_to_currentPostFragment"
+            app:destination="@id/currentPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currentPostFragment"
+        android:name="ru.netology.nmedia.UI.CurrentPostFragment"
+        android:label="current_post_fragment"
+        tools:layout="@layout/current_post_fragment">
+        <argument
+            android:name="idCurrentPost"
+            app:argType="long" />
+        <action
+            android:id="@+id/currentPostFragmentToPostContentFragment"
+            app:destination="@id/postContentFragment" />
+    </fragment>
 
 </navigation>

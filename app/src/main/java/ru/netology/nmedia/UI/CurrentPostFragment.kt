@@ -29,32 +29,7 @@ class CurrentPostFragment : Fragment() {
 
     private val args by navArgs<CurrentPostFragmentArgs>()
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel.sharePostContent.observe(this) { postContent ->
-            val intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, postContent)
-                type = "text/plain"
-            }
-            val shareIntent = Intent.createChooser(intent, getString(R.string.chooser_share_post))
-            startActivity(shareIntent)
-        }
-
-        viewModel.navigateToPostContentScreenEvent.observe(viewLifecycleOwner) { initialContent ->
-            val direction = FeedFragmentDirections.toPostContentFragment(initialContent,  PostContentFragment.REQUEST_KEY)
-            findNavController().navigate(direction)
-        }
-
-        viewModel.playVideo.observe(this) { urlVideo ->
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlVideo)))
-        }
-
-    }
-
-       private lateinit var currentPost: Post
+    private lateinit var currentPost: Post
 
     private val Fragment.packageManager
         get() = activity?.packageManager
@@ -108,23 +83,15 @@ class CurrentPostFragment : Fragment() {
                 }
 
                 viewModel.navigateToPostContentScreenEvent.observe(viewLifecycleOwner) { initialContent ->
-                    val direction = FeedFragmentDirections.toPostContentFragment(initialContent,  PostContentFragment.REQUEST_KEY)
+                    val direction = CurrentPostFragmentDirections.currentPostFragmentToPostContentFragment(initialContent,  PostContentFragment.REQUEST_KEY)
                     findNavController().navigate(direction)
                 }
-//                viewModel
-//                    .navigateToPostContentScreenEvent
-//                    .observe(viewLifecycleOwner) { initialContent ->
-//                        val direction =
-//                            CurrentPostFragmentDirections.currentPostFragmentToPostContentFragment(
-//                                initialContent, PostContentFragment.REQUEST_CURRENT_POST_KEY
-//                            )
-//                        findNavController().navigate(direction)
-//                    }
+
 
                 setFragmentResultListener(
-                    requestKey = PostContentFragment.REQUEST_CURRENT_POST_KEY
+                    requestKey = PostContentFragment.REQUEST_KEY
                 ) { requestKey, bundle ->
-                    if (requestKey != PostContentFragment.REQUEST_CURRENT_POST_KEY) return@setFragmentResultListener
+                    if (requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
                     val newPostContent = bundle.getString(
                         PostContentFragment.RESULT_KEY
                     ) ?: return@setFragmentResultListener
