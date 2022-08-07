@@ -150,7 +150,7 @@ class CurrentPostFragment : Fragment() {
         shareIcon.text = countView(post.counterShare)
         content.movementMethod = ScrollingMovementMethod()
         likeIcon.isChecked = post.likedByMe
-        videoGroup.isVisible = post.video != null
+        videoGroup.isVisible = !post.video.isNullOrBlank()
     }
 }
 

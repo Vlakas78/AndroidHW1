@@ -80,7 +80,7 @@ internal class PostsAdapter(
                 buttonLike.text = countView(post.likes)
                 buttonLike.isChecked = post.likedByMe
                 buttonShare.text = countView(post.counterShare)
-                videoGroup.isVisible = post.video != null
+                videoGroup.isVisible = !post.video.isNullOrBlank()
                 options.setOnClickListener { popupMenu.show() }
             }
         }
