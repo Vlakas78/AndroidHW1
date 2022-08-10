@@ -113,6 +113,7 @@ class CurrentPostFragment : Fragment() {
                     viewModel.onPlayVideoClicked(currentPost)
                 }
 
+
                 val popupMenu by lazy {
                     PopupMenu(context, binding.options).apply {
                         inflate(R.menu.options_post)

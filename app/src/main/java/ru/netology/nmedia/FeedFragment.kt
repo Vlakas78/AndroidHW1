@@ -68,7 +68,7 @@ class FeedFragment : Fragment() {
 //         val direction = FeedFragmentDirections.toCurrentPostFragment(currentPost.id)
 //           findNavController().navigate(direction)
 //        }
-    }
+}
 
 
     override fun onCreateView(
