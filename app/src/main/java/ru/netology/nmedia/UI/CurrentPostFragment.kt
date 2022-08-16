@@ -155,4 +155,3 @@ class CurrentPostFragment : Fragment() {
 }
 
 
-

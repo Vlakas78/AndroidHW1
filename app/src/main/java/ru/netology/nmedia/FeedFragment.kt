@@ -64,10 +64,10 @@ class FeedFragment : Fragment() {
             findNavController().navigate(direction)
         }
 
-//        viewModel.navigateToPostContentScreenEvent.observe(this) { currentPost ->
-//         val direction = FeedFragmentDirections.toCurrentPostFragment(currentPost.id)
-//           findNavController().navigate(direction)
-//        }
+        viewModel.navigateToPostContentScreenEvent.observe(this) { currentPost ->
+         val direction = FeedFragmentDirections.toCurrentPostFragment(currentPost.id)
+           findNavController().navigate(direction)
+        }
     }
 
 
